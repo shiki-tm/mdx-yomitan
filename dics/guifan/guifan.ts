@@ -31,6 +31,8 @@ function traverse($: cheerio.CheerioAPI, node: AnyNode): StructuredContentNode {
         case "x-pr":
         case "script":
           return "";
+        case "img":
+          return "(img)";
         case "x-hwp":
           const next = node.next?.next;
           const res = ["←", def] as StructuredContentNode[];
