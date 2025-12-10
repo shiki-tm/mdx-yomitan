@@ -1,0 +1,18 @@
+{
+  "name": "mdx-yomitan",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest",
+    "domhandler": "^5.0.3"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "cheerio": "^1.1.2",
+    "pinyin-tone-tool": "^1.0.1",
+    "yomichan-dict-builder": "^2.10.0"
+  }
+}
