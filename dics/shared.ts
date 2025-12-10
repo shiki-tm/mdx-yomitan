@@ -1,5 +1,5 @@
 import { readFileSync } from "fs";
-import { splitOnFirst } from "../utils";
+import { splitOnFirst } from "../utils.ts";
 
 export type ParsedTerm = {
   headword: string;

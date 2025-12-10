@@ -1,6 +1,6 @@
 import { TermEntry, type Dictionary } from "yomichan-dict-builder";
-import { splitByElement } from "../../utils";
-import type { ParsedTerm } from "../shared";
+import { splitByElement } from "../../utils.ts";
+import type { ParsedTerm } from "../shared.ts";
 import * as cheerio from "cheerio";
 import type { StructuredContentNode } from "yomichan-dict-builder/dist/types/yomitan/termbank";
 import { ElementType } from "domelementtype";

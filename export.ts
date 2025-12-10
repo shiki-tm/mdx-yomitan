@@ -1,6 +1,6 @@
-import { readTermsFromFile } from "./dics/shared";
+import { readTermsFromFile } from "./dics/shared.ts";
 import { Dictionary, DictionaryIndex } from "yomichan-dict-builder";
-import { processGuifan } from "./dics/guifan/guifan";
+import { processGuifan } from "./dics/guifan/guifan.ts";
 
 const versions = {
   guifan: "0.01",
