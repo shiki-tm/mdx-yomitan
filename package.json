@@ -1,6 +1,6 @@
 {
   "name": "mdx-yomitan",
-  "module": "index.ts",
+  "module": "export.ts",
   "type": "module",
   "private": true,
   "devDependencies": {
