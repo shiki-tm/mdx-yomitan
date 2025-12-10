@@ -55,9 +55,9 @@ await processGuifan(
   [guifanPinyinDic, guifanZhuyinDic]
 );
 
-[guifanPinyinDic, guifanZhuyinDic].forEach((f) =>
-  f.addFile("./styles.css", "styles.css")
-);
+for (const f of [guifanPinyinDic, guifanZhuyinDic]) {
+  await f.addFile("./styles.css", "styles.css");
+}
 
 await guifanPinyinDic.export("build");
 console.log("Exported 现代汉语规范词典 拼音");
