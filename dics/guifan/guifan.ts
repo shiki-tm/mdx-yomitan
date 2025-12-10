@@ -13,28 +13,41 @@ function traverse($: cheerio.CheerioAPI, node: AnyNode): StructuredContentNode {
       return node.data.trim();
     case ElementType.Tag:
       const contents = $(node).contents();
+      const def = {
+        tag: "span",
+        content: contents
+          .map((_, el) => traverse($, el))
+          .toArray()
+          .filter((c) => c !== ""),
+        data: {
+          guifan: node.tagName ?? "no-tag",
+          class: node.attribs["class"],
+        } as Record<string, string>,
+      } satisfies StructuredContentNode;
       switch (node.tagName) {
         // ignore
         case "x-hw":
         case "x-hws":
-        case "x-hwp":
         case "x-pr":
         case "script":
           return "";
+        case "x-hwp":
+          const next = node.next?.next;
+          const res = ["←", def] as StructuredContentNode[];
+          if (next?.type === ElementType.Tag && next.tagName === "x-pr")
+            res.push({
+              tag: "span",
+              content: $(next).text(),
+              data: {
+                guifan: next.tagName ?? "no-tag",
+                class: next.attribs["class"],
+              },
+            } as StructuredContentNode);
+          return res;
         case "br":
           return "\n";
         default:
-          return {
-            tag: "span",
-            content: contents
-              .map((_, el) => traverse($, el))
-              .toArray()
-              .filter((c) => c !== ""),
-            data: {
-              guifan: node.tagName ?? "no-tag",
-              class: node.attribs["class"],
-            } as Record<string, string>,
-          };
+          return def;
       }
     case ElementType.Script:
       return "";

@@ -62,6 +62,9 @@ font-family: "Noto Sans CJK SC";
 [data-sc-guifan="x-er"] {
   font-size: x-small;
 }
+[data-sc-guifan="x-hwp"] + [data-sc-guifan="x-pr"] {
+  margin-left: 4px;
+}
 
 [data-sc-guifan="dt"][data-sc-class="x-sbl2t"],
 [data-sc-guifan="dd"][data-sc-class="x-sbl2t"] {
