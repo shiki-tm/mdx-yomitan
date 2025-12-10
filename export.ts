@@ -3,7 +3,7 @@ import { Dictionary, DictionaryIndex } from "yomichan-dict-builder";
 import { processGuifan } from "./dics/guifan/guifan.ts";
 
 const versions = {
-  guifan: "0.01",
+  guifan: "2025/12/10.2",
 };
 
 const guifanPinyinDic = new Dictionary({ fileName: "guifan-pinyin.zip" });
@@ -13,7 +13,15 @@ const guifanPinyinIndex = new DictionaryIndex()
   .setRevision(versions.guifan)
   .setAuthor("shadow")
   .setAttribution("外语教学与研究出版社 (2010)")
-  .setDescription("A monolingual dictionary of Mandarin Chinese.");
+  .setDescription("A monolingual dictionary of Simplified Mandarin Chinese.")
+  .setIsUpdatable(true)
+  .setIndexUrl(
+    "https://github.com/username-011/mdx-yomitan/releases/latest/download/index-guifan-pinyin.json"
+  )
+  .setDownloadUrl(
+    "https://github.com/username-011/mdx-yomitan/releases/latest/download/guifan-pinyin.zip"
+  );
+
 guifanPinyinIndex.index.sourceLanguage = "zh";
 guifanPinyinIndex.index.targetLanguage = "zh";
 const guifanZhuyinIndex = new DictionaryIndex()
@@ -21,7 +29,14 @@ const guifanZhuyinIndex = new DictionaryIndex()
   .setRevision(versions.guifan)
   .setAuthor("shadow")
   .setAttribution("外语教学与研究出版社 (2010)")
-  .setDescription("A monolingual dictionary of Mandarin Chinese.");
+  .setDescription("A monolingual dictionary of Simplified Mandarin Chinese.")
+  .setIsUpdatable(true)
+  .setIndexUrl(
+    "https://github.com/username-011/mdx-yomitan/releases/latest/download/index-guifan-zhuyin.json"
+  )
+  .setDownloadUrl(
+    "https://github.com/username-011/moe-dict-yomitan/releases/latest/download/guifan-zhuyin.zip"
+  );
 guifanZhuyinIndex.index.sourceLanguage = "zh";
 guifanZhuyinIndex.index.targetLanguage = "zh";
 await guifanPinyinDic.setIndex(
