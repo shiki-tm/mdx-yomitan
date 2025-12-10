@@ -75,10 +75,12 @@ font-family: "Noto Sans CJK SC";
   margin-left: 5.2em;
 }
 [data-sc-guifan="dd"][data-sc-class="x-sblt"],
-[data-sc-guifan="dd"][data-sc-class="x-sbl0t"],
-[data-sc-guifan="dt"][data-sc-class="x-sblt"],
-[data-sc-guifan="dt"][data-sc-class="x-sbl0t"] {
+[data-sc-guifan="dt"][data-sc-class="x-sblt"] {
   margin-left: 2.75em;
+}
+[data-sc-guifan="dt"][data-sc-class="x-sbl0t"],
+[data-sc-guifan="dd"][data-sc-class="x-sbl0t"] {
+  margin-left: 1.45em;
 }
 [data-sc-guifan="dt"][data-sc-class="x-sbl"] {
   margin-left: 1.3em;
