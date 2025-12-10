@@ -5,19 +5,7 @@ import * as cheerio from "cheerio";
 import type { StructuredContentNode } from "yomichan-dict-builder/dist/types/yomitan/termbank";
 import { ElementType } from "domelementtype";
 import type { AnyNode, Element, Text } from "domhandler";
-
-// x-pr = reading
-// dt = definition parent
-// x-sn = definition number
-// x-f = dot?
-// dd = example parent, .classes = inner structure?
-// x-ex = example outer
-// x-key = example inner (target word)
-// x-lb = example divider line
-// x-sbl = -> example structural arrow
-// x-sblt = example structural triangle (showing the example content)
-// x-gram, x-g = part of speech
-// x-sbl0 = zero??
+import { p2z } from "pinyin-to-zhuyin";
 
 function traverse($: cheerio.CheerioAPI, node: AnyNode): StructuredContentNode {
   switch (node.type) {
@@ -40,7 +28,10 @@ function traverse($: cheerio.CheerioAPI, node: AnyNode): StructuredContentNode {
               .map((_, el) => traverse($, el))
               .toArray()
               .filter((c) => c !== ""),
-            data: { guifan: node.tagName ?? "no-tag" },
+            data: {
+              guifan: node.tagName ?? "no-tag",
+              class: node.attribs["class"],
+            } as Record<string, string>,
           };
       }
     case ElementType.Script:
@@ -53,7 +44,7 @@ function traverse($: cheerio.CheerioAPI, node: AnyNode): StructuredContentNode {
 // todo: add separate terms for non erhua variants where possible
 export async function processGuifan(
   terms: ParsedTerm[],
-  pinyinDic: Dictionary
+  [pinyinDic, zhuyinDic]: [Dictionary, Dictionary]
 ) {
   let i = 0;
   for (const term of terms /* .filter((t) => t.headword === "埃") */) {
@@ -93,15 +84,15 @@ export async function processGuifan(
         .filter((n) => n !== "") as StructuredContentNode[];
       if (tradNode) {
         definitionsMain.unshift({
-          tag: "div",
-          content: $(tradNode).text().trim(),
+          tag: "span",
+          content:
+            $(tradNode)
+              .text()
+              .trim()
+              .match(/（(.+?)）/)
+              ?.at(1) ?? "",
           data: { guifan: "trad" },
-        });
-      } else {
-        definitionsMain.unshift({
-          tag: "div",
-          content: "",
-          data: { guifan: "start-definitions-new-line" },
+          lang: "zh-TW",
         });
       }
       const definitionContentsForReading = {
@@ -117,7 +108,16 @@ export async function processGuifan(
           type: "structured-content",
           content: definitionContentsForReading,
         });
-      await pinyinDic.addTerm(pinyinTermEntry.build());
+      const zhuyinTermEntry = new TermEntry(term.headword)
+        .setReading(p2z(reading ?? ""))
+        .addDetailedDefinition({
+          type: "structured-content",
+          content: definitionContentsForReading,
+        });
+      await Promise.all([
+        pinyinDic.addTerm(pinyinTermEntry.build()),
+        zhuyinDic.addTerm(zhuyinTermEntry.build()),
+      ]);
       continue;
     }
     if (++i % 10000 === 0) {
