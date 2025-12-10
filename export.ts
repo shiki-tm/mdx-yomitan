@@ -35,7 +35,7 @@ const guifanZhuyinIndex = new DictionaryIndex()
     "https://github.com/username-011/mdx-yomitan/releases/latest/download/index-guifan-zhuyin.json"
   )
   .setDownloadUrl(
-    "https://github.com/username-011/moe-dict-yomitan/releases/latest/download/guifan-zhuyin.zip"
+    "https://github.com/username-011/mdx-yomitan/releases/latest/download/guifan-zhuyin.zip"
   );
 guifanZhuyinIndex.index.sourceLanguage = "zh";
 guifanZhuyinIndex.index.targetLanguage = "zh";
