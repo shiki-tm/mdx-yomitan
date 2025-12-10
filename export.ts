@@ -3,7 +3,7 @@ import { Dictionary, DictionaryIndex } from "yomichan-dict-builder";
 import { processGuifan } from "./dics/guifan/guifan.ts";
 
 const versions = {
-  guifan: "2025/12/10.11",
+  guifan: "2025/12/10.9a",
 };
 
 const guifanPinyinDic = new Dictionary({ fileName: "guifan-pinyin.zip" });
