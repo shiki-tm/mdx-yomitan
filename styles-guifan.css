@@ -84,6 +84,9 @@ font-family: "Noto Sans CJK SC", sans-serif;
 [data-sc-guifan="x-hwp"] + [data-sc-guifan="x-pr"] {
   margin-left: 4px;
 }
+a {
+  color: #b971b9;
+}
 
 [data-sc-guifan="dt"][data-sc-class="x-sbl2t"],
 [data-sc-guifan="dd"][data-sc-class="x-sbl2t"] {
