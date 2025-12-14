@@ -39,9 +39,6 @@ font-family: "Noto Sans CJK SC", sans-serif;
 [data-sc-guifan="dt"] {
   display: block;
 }
-[data-sc-guifan="dt"]:last-child {
-  margin-bottom: 2px;
-}
 [data-sc-guifan="dd"] {
   color: #588484;
 }
@@ -91,6 +88,9 @@ font-family: "Noto Sans CJK SC", sans-serif;
 }
 a {
   color: #b971b9;
+}
+[data-sc-guifan="definitions-parent"] > *:last-child {
+  margin-bottom: 2px;
 }
 
 [data-sc-guifan="dt"][data-sc-class="x-sbl2t"],

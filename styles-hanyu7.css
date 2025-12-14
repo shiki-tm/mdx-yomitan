@@ -85,6 +85,6 @@ a {
 details:last-child {
   margin-bottom: 4px;
 }
-[data-sc-hanyu7="def"]:last-child {
+[data-sc-hanyu7="definitions-parent"] > *:last-child {
   margin-bottom: 2px;
 }

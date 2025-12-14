@@ -4,8 +4,8 @@ import { processGuifan } from "./dics/guifan/guifan.ts";
 import { processHanyu7 } from "./dics/hanyu7/hanyu7.ts";
 
 const versions = {
-  guifan: "2025/12/14.7",
-  hanyu7: "2025/12/14.7",
+  guifan: "2025/12/14.8",
+  hanyu7: "2025/12/14.8",
 };
 
 const guifanPinyinDic = new Dictionary({ fileName: "guifan-pinyin.zip" });
