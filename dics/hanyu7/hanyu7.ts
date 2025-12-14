@@ -149,6 +149,18 @@ export async function processHanyu7(
           })
         )
         .filter((n) => n !== "") as StructuredContentNode[];
+      reading = reading.replaceAll("·", "");
+      const weirdReadingMatch = reading.match(
+        /(?<normal>.*?)（(?<altReading>.+?)）/
+      );
+      if (weirdReadingMatch) {
+        const [r1, r2] = [
+          weirdReadingMatch.groups!.normal!,
+          weirdReadingMatch.groups!.altReading!,
+        ];
+        reading = r1;
+        entryContents.splice(1, 0, `(${r2})`);
+      }
       const definitionContentsForReading = {
         tag: "span",
         content: entryContents,
@@ -162,7 +174,7 @@ export async function processHanyu7(
           content: definitionContentsForReading,
         });
       const zhuyinTermEntry = new TermEntry(term.headword)
-        .setReading(p2z(reading.replaceAll("·", "")))
+        .setReading(p2z(reading))
         .addDetailedDefinition({
           type: "structured-content",
           content: definitionContentsForReading,

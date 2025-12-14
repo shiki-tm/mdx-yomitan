@@ -5,7 +5,7 @@ import { processHanyu7 } from "./dics/hanyu7/hanyu7.ts";
 
 const versions = {
   guifan: "2025/12/14.1",
-  hanyu7: "2025/12/14.1",
+  hanyu7: "2025/12/14.2",
 };
 
 const guifanPinyinDic = new Dictionary({ fileName: "guifan-pinyin.zip" });
@@ -51,6 +51,7 @@ await guifanZhuyinDic.setIndex(
   "build",
   "index-guifan-zhuyin.json"
 );
+
 const hanyu7PinyinDic = new Dictionary({ fileName: "hanyu7-pinyin.zip" });
 const hanyu7ZhuyinDic = new Dictionary({ fileName: "hanyu7-zhuyin.zip" });
 const hanyu7PinyinIndex = new DictionaryIndex()
