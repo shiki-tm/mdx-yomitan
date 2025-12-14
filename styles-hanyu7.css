@@ -12,7 +12,7 @@ font-family: "Noto Sans CJK SC", sans-serif;
   border-radius: 4px;
   padding: 4px;
   font-size: 1.1em;
-  vertical-align: bottom;
+  vertical-align: top;
   margin-right: 6px;
   margin-bottom: 2px;
 }
@@ -25,7 +25,7 @@ font-family: "Noto Sans CJK SC", sans-serif;
   border-radius: 4px;
   padding: 4px;
   font-size: 1.1em;
-  vertical-align: bottom;
+  vertical-align: top;
   margin-bottom: 2px;
 }
 [data-sc-hanyu7="ps"] {
@@ -84,4 +84,7 @@ a {
 }
 details:last-child {
   margin-bottom: 4px;
+}
+[data-sc-hanyu7="def"]:last-child {
+  margin-bottom: 2px;
 }
