@@ -12,7 +12,8 @@ function traverse($: cheerio.CheerioAPI, node: AnyNode): StructuredContentNode {
     case ElementType.Text:
       return node.data.trim();
     case ElementType.Tag:
-      const contents = $(node).contents();
+      const cheerioEl = $(node);
+      const contents = cheerioEl.contents();
       const def = {
         tag: "span",
         content: contents
@@ -25,14 +26,24 @@ function traverse($: cheerio.CheerioAPI, node: AnyNode): StructuredContentNode {
         } as Record<string, string>,
       } satisfies StructuredContentNode;
       switch (node.tagName) {
-        // ignore
         case "x-hw":
         case "x-hws":
           def.data.guifan = "simp";
           return def;
+        // ignore
         case "x-pr":
         case "script":
           return "";
+        case "a":
+          const urlParams = new URLSearchParams({
+            query: cheerioEl.text(),
+            wildcards: "off",
+          }).toString();
+          return {
+            tag: "a",
+            href: `?${urlParams}`,
+            content: def.content,
+          };
         case "img":
           return "(img)";
         case "x-hwp":

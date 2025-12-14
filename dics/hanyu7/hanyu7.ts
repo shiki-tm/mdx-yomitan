@@ -56,13 +56,11 @@ function traverse(
             query: cheerioEl.text(),
             wildcards: "off",
           }).toString();
-          const a = {
+          return {
             tag: "a",
             href: `?${urlParams}`,
             content: def.content,
-            // href: (node.attribs["href"] as string) ?? "",
-          } satisfies StructuredContentNode;
-          return a;
+          };
         case "hw":
           const getSimp = (content: StructuredContentNode) =>
             ({
