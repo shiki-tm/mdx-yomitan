@@ -149,12 +149,16 @@ export async function processHanyu7(
                 content: r,
                 data: { hanyu7: "pinyin" },
               },
-              { tag: "span", content: p2z(r), data: { hanyu7: "zhuyin" } },
+              {
+                tag: "span",
+                content: p2z(r.replaceAll("·", " ")),
+                data: { hanyu7: "zhuyin" },
+              },
             ] satisfies StructuredContentNode;
           })
         )
         .filter((n) => n !== "") as StructuredContentNode[];
-      reading = reading.replaceAll("·", "");
+      reading = reading.replaceAll("·", " ");
       const weirdReadingMatch = reading.match(
         /(?<normal>.*?)（(?<altReading>.+?)）/
       );
