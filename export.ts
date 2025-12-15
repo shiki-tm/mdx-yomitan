@@ -5,7 +5,7 @@ import { processHanyu7 } from "./dics/hanyu7/hanyu7.ts";
 
 const versions = {
   guifan: "2025/12/15.1",
-  hanyu7: "2025/12/15.1",
+  hanyu7: "2025/12/15.2",
 };
 
 const guifanPinyinDic = new Dictionary({ fileName: "guifan-pinyin.zip" });
@@ -110,9 +110,10 @@ await processHanyu7(readTermsFromFile(`data/mdx-7/mdx/现汉7.mdx.txt`), [
 for (const f of [guifanPinyinDic, guifanZhuyinDic]) {
   await f.addFile("./styles-guifan.css", "styles.css");
 }
-for (const f of [hanyu7PinyinDic, hanyu7ZhuyinDic]) {
-  await f.addFile("./styles-hanyu7.css", "styles.css");
-}
+await Promise.all([
+  hanyu7PinyinDic.addFile("./styles-hanyu7-pinyin.css", "styles.css"),
+  hanyu7ZhuyinDic.addFile("./styles-hanyu7-zhuyin.css", "styles.css"),
+]);
 
 await guifanPinyinDic.export("build");
 console.log("Exported 现代汉语规范词典 拼音");

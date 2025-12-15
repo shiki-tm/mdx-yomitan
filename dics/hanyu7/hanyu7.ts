@@ -12,7 +12,7 @@ function traverse(
   $: CheerioAPI,
   node: AnyNode,
   term: string,
-  onReading: (s: string) => string
+  onReading: (s: string) => StructuredContentNode
 ): StructuredContentNode {
   switch (node.type) {
     case ElementType.Text:
@@ -143,7 +143,14 @@ export async function processHanyu7(
               reading = r;
               return "";
             }
-            return r;
+            return [
+              {
+                tag: "span",
+                content: r,
+                data: { hanyu7: "pinyin" },
+              },
+              { tag: "span", content: p2z(r), data: { hanyu7: "zhuyin" } },
+            ] satisfies StructuredContentNode;
           })
         )
         .filter((n) => n !== "") as StructuredContentNode[];

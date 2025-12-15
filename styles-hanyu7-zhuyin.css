@@ -90,3 +90,10 @@ details:last-child {
 [data-sc-hanyu7="definitions-parent"] > *:last-child {
   margin-bottom: 2px;
 }
+
+[data-sc-hanyu7="pinyin"] {
+  display: none;
+}
+[data-sc-hanyu7="zhuyin"] {
+  color: #c64646;
+}
