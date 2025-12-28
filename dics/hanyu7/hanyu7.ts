@@ -181,6 +181,7 @@ export async function processHanyu7(
         data: { hanyu7: "definitions-parent" },
         lang: "zh-CN",
       } satisfies StructuredContentNode;
+      reading = reading.replace(/-|\/\//g, " ");
       const pinyinTermEntry = new TermEntry(term.headword)
         .setReading(reading)
         .addDetailedDefinition({
@@ -188,7 +189,7 @@ export async function processHanyu7(
           content: definitionContentsForReading,
         });
       const zhuyinTermEntry = new TermEntry(term.headword)
-        .setReading(p2z(reading.replace(/-|\/\//g, " ")).replaceAll(" ", ""))
+        .setReading(p2z(reading).replaceAll(" ", ""))
         .addDetailedDefinition({
           type: "structured-content",
           content: definitionContentsForReading,

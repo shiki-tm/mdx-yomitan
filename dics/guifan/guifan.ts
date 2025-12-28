@@ -104,7 +104,8 @@ export async function processGuifan(
       const readingNode = definitionSection.find(
         (d) => d.type === ElementType.Tag && d.tagName === "x-pr"
       );
-      const reading = readingNode ? $(readingNode).text() : "";
+      let reading = readingNode ? $(readingNode).text() : "";
+      reading = reading.replace(/-|\/\//g, " ");
       const tradNode = filterUntil(
         definitionSection,
         (node) => node.type === ElementType.Tag && node.tagName === "dt"
@@ -144,15 +145,13 @@ export async function processGuifan(
         lang: "zh-CN",
       } satisfies StructuredContentNode;
       const pinyinTermEntry = new TermEntry(term.headword)
-        .setReading(reading ?? "")
+        .setReading(reading)
         .addDetailedDefinition({
           type: "structured-content",
           content: definitionContentsForReading,
         });
       const zhuyinTermEntry = new TermEntry(term.headword)
-        .setReading(
-          p2z((reading ?? "").replace(/-|\/\//g, " ")).replaceAll(" ", "")
-        )
+        .setReading(p2z(reading.replaceAll(" ", "")))
         .addDetailedDefinition({
           type: "structured-content",
           content: definitionContentsForReading,
