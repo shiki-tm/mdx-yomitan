@@ -89,6 +89,9 @@ a {
   margin-bottom: 2px;
 }
 
+[data-sc-guifan="x-sbl0"] {
+  display: none;
+}
 [data-sc-guifan="dt"][data-sc-class="x-sbl2t"],
 [data-sc-guifan="dd"][data-sc-class="x-sbl2t"] {
   margin-left: 4em;
@@ -101,10 +104,6 @@ a {
 [data-sc-guifan="dt"][data-sc-class="x-sblt"] {
   margin-left: 2.75em;
 }
-[data-sc-guifan="dt"][data-sc-class="x-sbl0t"],
-[data-sc-guifan="dd"][data-sc-class="x-sbl0t"] {
-  margin-left: 1.45em;
-}
 [data-sc-guifan="dt"][data-sc-class="x-sbl"] {
   margin-left: 1.3em;
 }
@@ -114,7 +113,8 @@ a {
 [data-sc-guifan="dt"][data-sc-class="x-sbl3"] {
   margin-left: 3.9em;
 }
-[data-sc-guifan="dd"][data-sc-class="x-ext"] {
+[data-sc-guifan="dd"]:is([data-sc-class="x-ext"], [data-sc-class="x-sbl0t"]),
+[data-sc-guifan="dt"][data-sc-class="x-sbl0t"] {
   margin-left: 0.4em;
 }
 [data-sc-guifan="dd"][data-sc-class="x-ext1"] {
