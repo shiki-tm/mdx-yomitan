@@ -6,11 +6,12 @@ import type { StructuredContentNode } from "yomichan-dict-builder/dist/types/yom
 import { ElementType } from "domelementtype";
 import type { AnyNode, Element, Text } from "domhandler";
 import { p2z } from "pinyin-to-zhuyin";
-import { writeFileSync } from "fs";
+import { mkdirSync, writeFileSync } from "fs";
 import { createHash } from "crypto";
 
 async function addImage(b64: string, dic: Dictionary, name: string) {
   b64 = b64.replace(/^data:\w+\/\w+;base64,/g, "");
+  mkdirSync("data/mdx-guifan-2/img", { recursive: true });
   writeFileSync(
     `data/mdx-guifan-2/img/${name}.png`,
     Buffer.from(b64, "base64")
