@@ -85,6 +85,23 @@ details:last-child {
   margin-bottom: 2px;
 }
 
+[data-sc-hanyu7="note"] {
+  text-decoration: underline;
+  text-decoration-style: dashed;
+  text-underline-offset: 3px;
+  color: #b1b11f;
+  padding-right: 8px;
+}
+[data-sc-hanyu7="column"] {
+  display: block;
+  background-color: rgb(197 241 244 / 10%);
+  border-radius: 8px;
+  margin-top: 4px;
+  margin-bottom: 2px;
+  color: #bab99e;
+  padding: 6px;
+}
+
 [data-sc-hanyu7="zhuyin"] {
   display: none;
 }
