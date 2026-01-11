@@ -2,7 +2,10 @@ import { TermEntry, type Dictionary } from "yomichan-dict-builder";
 import { filterUntil, splitByElement } from "../../utils.ts";
 import type { ParsedTerm } from "../shared.ts";
 import * as cheerio from "cheerio";
-import type { StructuredContentNode } from "yomichan-dict-builder/dist/types/yomitan/termbank";
+import type {
+  DetailedDefinition,
+  StructuredContentNode,
+} from "yomichan-dict-builder/dist/types/yomitan/termbank";
 import { ElementType } from "domelementtype";
 import type { AnyNode, Element, Text } from "domhandler";
 import { p2z } from "pinyin-to-zhuyin";
@@ -108,29 +111,12 @@ export async function processGuifan(
   [pinyinDic, zhuyinDic]: [Dictionary, Dictionary]
 ) {
   let i = 0;
+  const linkedToDb = {} as Record<string, DetailedDefinition>;
+  const linkedQueue = {} as Record<string, string>;
   for (const term of terms /* .filter((t) => t.headword === "埃") */) {
     let linkMatch: RegExpMatchArray | null = null;
     if ((linkMatch = term.xmlString.match(/@@@LINK=(.+?)/))) {
-      const linkedTerm = linkMatch[1]!;
-      const urlParams = new URLSearchParams({
-        query: linkedTerm,
-        wildcards: "off",
-      }).toString();
-      const termEntry = new TermEntry(term.headword)
-        .setReading("")
-        .addDetailedDefinition({
-          type: "structured-content",
-          content: {
-            tag: "a",
-            href: `?${urlParams}`,
-            content: `→${linkedTerm}`,
-            lang: "zh-CN",
-          },
-        });
-      await Promise.all([
-        pinyinDic.addTerm(termEntry.build()),
-        zhuyinDic.addTerm(termEntry.build()),
-      ]);
+      linkedQueue[term.headword] = linkMatch[1]!;
       continue;
     }
     const $ = cheerio.load(term.xmlString);
@@ -183,18 +169,23 @@ export async function processGuifan(
         data: { guifan: "definitions-parent" },
         lang: "zh-CN",
       } satisfies StructuredContentNode;
+      const definition = {
+        type: "structured-content",
+        content: definitionContentsForReading,
+      } satisfies DetailedDefinition;
+      // I'm half asleep so this is what you get
+      const linkedReading = definitionsMain.find(
+        (e) =>
+          typeof e === "object" &&
+          (e as any).find?.((ee: any) => ee.data?.guifan === "x-hwp")
+      );
+      if (linkedReading) linkedToDb[term.headword] = definition;
       const pinyinTermEntry = new TermEntry(term.headword)
         .setReading(reading)
-        .addDetailedDefinition({
-          type: "structured-content",
-          content: definitionContentsForReading,
-        });
+        .addDetailedDefinition(definition);
       const zhuyinTermEntry = new TermEntry(term.headword)
         .setReading(p2z(reading).replaceAll(" ", ""))
-        .addDetailedDefinition({
-          type: "structured-content",
-          content: definitionContentsForReading,
-        });
+        .addDetailedDefinition(definition);
       await Promise.all([
         pinyinDic.addTerm(pinyinTermEntry.build()),
         zhuyinDic.addTerm(zhuyinTermEntry.build()),
@@ -204,4 +195,38 @@ export async function processGuifan(
       console.log(`Processed ${i} terms.`);
     }
   }
+
+  let j = 0;
+  for (const [fromLinked, toLinked] of Object.entries(linkedQueue)) {
+    const toLinkedTermDefinition = linkedToDb[toLinked];
+    if (!toLinkedTermDefinition) {
+      // wtf is this bug. I don't care enough for these 2 words -_-
+      // maybe someday in distant future I'll get to it
+      console.log(
+        `Linked term not found, toLinked: ${toLinked}, fromLinked: ${fromLinked}`
+      );
+      continue;
+    }
+    let actualReading = "";
+    // more unhinged code
+    for (const e of (toLinkedTermDefinition as any).content.content) {
+      const f = (e as any).find?.((ee: any) => ee.data?.guifan === "x-pr");
+      if (f) {
+        actualReading = f.content;
+        break;
+      }
+    }
+    const pinyinTerm = new TermEntry(fromLinked)
+      .setReading(actualReading)
+      .addDetailedDefinition(toLinkedTermDefinition);
+    const zhuyinTerm = new TermEntry(fromLinked)
+      .setReading(p2z(actualReading).replaceAll(" ", ""))
+      .addDetailedDefinition(toLinkedTermDefinition);
+    await Promise.all([
+      pinyinDic.addTerm(pinyinTerm.build()),
+      zhuyinDic.addTerm(zhuyinTerm.build()),
+    ]);
+    j++;
+  }
+  console.log(`Processed ${j} linked terms.`);
 }
