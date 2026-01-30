@@ -4,7 +4,7 @@ import { processGuifan } from "./dics/guifan/guifan.ts";
 import { processHanyu7 } from "./dics/hanyu7/hanyu7.ts";
 
 const versions = {
-  guifan: "2026/01/11.1",
+  guifan: "2026/01/30.1",
   hanyu7: "2026/01/12.1",
 };
 
@@ -18,10 +18,10 @@ const guifanPinyinIndex = new DictionaryIndex()
   .setDescription("A monolingual dictionary of Simplified Mandarin Chinese.")
   .setIsUpdatable(true)
   .setIndexUrl(
-    "https://github.com/username-011/mdx-yomitan/releases/latest/download/index-guifan-pinyin.json"
+    "https://github.com/username-011/mdx-yomitan/releases/latest/download/index-guifan-pinyin.json",
   )
   .setDownloadUrl(
-    "https://github.com/username-011/mdx-yomitan/releases/latest/download/guifan-pinyin.zip"
+    "https://github.com/username-011/mdx-yomitan/releases/latest/download/guifan-pinyin.zip",
   );
 
 guifanPinyinIndex.index.sourceLanguage = "zh";
@@ -34,22 +34,22 @@ const guifanZhuyinIndex = new DictionaryIndex()
   .setDescription("A monolingual dictionary of Simplified Mandarin Chinese.")
   .setIsUpdatable(true)
   .setIndexUrl(
-    "https://github.com/username-011/mdx-yomitan/releases/latest/download/index-guifan-zhuyin.json"
+    "https://github.com/username-011/mdx-yomitan/releases/latest/download/index-guifan-zhuyin.json",
   )
   .setDownloadUrl(
-    "https://github.com/username-011/mdx-yomitan/releases/latest/download/guifan-zhuyin.zip"
+    "https://github.com/username-011/mdx-yomitan/releases/latest/download/guifan-zhuyin.zip",
   );
 guifanZhuyinIndex.index.sourceLanguage = "zh";
 guifanZhuyinIndex.index.targetLanguage = "zh";
 await guifanPinyinDic.setIndex(
   guifanPinyinIndex.build(),
   "build",
-  "index-guifan-pinyin.json"
+  "index-guifan-pinyin.json",
 );
 await guifanZhuyinDic.setIndex(
   guifanZhuyinIndex.build(),
   "build",
-  "index-guifan-zhuyin.json"
+  "index-guifan-zhuyin.json",
 );
 
 const hanyu7PinyinDic = new Dictionary({ fileName: "hanyu7-pinyin.zip" });
@@ -62,10 +62,10 @@ const hanyu7PinyinIndex = new DictionaryIndex()
   .setDescription("A monolingual dictionary of Simplified Mandarin Chinese.")
   .setIsUpdatable(true)
   .setIndexUrl(
-    "https://github.com/username-011/mdx-yomitan/releases/latest/download/index-hanyu7-pinyin.json"
+    "https://github.com/username-011/mdx-yomitan/releases/latest/download/index-hanyu7-pinyin.json",
   )
   .setDownloadUrl(
-    "https://github.com/username-011/mdx-yomitan/releases/latest/download/hanyu7-pinyin.zip"
+    "https://github.com/username-011/mdx-yomitan/releases/latest/download/hanyu7-pinyin.zip",
   );
 hanyu7PinyinIndex.index.sourceLanguage = "zh";
 hanyu7PinyinIndex.index.targetLanguage = "zh";
@@ -77,29 +77,29 @@ const hanyu7ZhuyinIndex = new DictionaryIndex()
   .setDescription("A monolingual dictionary of Simplified Mandarin Chinese.")
   .setIsUpdatable(true)
   .setIndexUrl(
-    "https://github.com/username-011/mdx-yomitan/releases/latest/download/index-hanyu7-zhuyin.json"
+    "https://github.com/username-011/mdx-yomitan/releases/latest/download/index-hanyu7-zhuyin.json",
   )
   .setDownloadUrl(
-    "https://github.com/username-011/mdx-yomitan/releases/latest/download/hanyu7-zhuyin.zip"
+    "https://github.com/username-011/mdx-yomitan/releases/latest/download/hanyu7-zhuyin.zip",
   );
 hanyu7ZhuyinIndex.index.sourceLanguage = "zh";
 hanyu7ZhuyinIndex.index.targetLanguage = "zh";
 await hanyu7PinyinDic.setIndex(
   hanyu7PinyinIndex.build(),
   "build",
-  "index-hanyu7-pinyin.json"
+  "index-hanyu7-pinyin.json",
 );
 await hanyu7ZhuyinDic.setIndex(
   hanyu7ZhuyinIndex.build(),
   "build",
-  "index-hanyu7-zhuyin.json"
+  "index-hanyu7-zhuyin.json",
 );
 
 await processGuifan(
   readTermsFromFile(
-    `data/mdx-guifan-2/mdx/【现代汉语规范词典(第2版)】.mdx.txt`
+    `data/mdx-guifan-2/mdx/【现代汉语规范词典(第2版)】.mdx.txt`,
   ),
-  [guifanPinyinDic, guifanZhuyinDic]
+  [guifanPinyinDic, guifanZhuyinDic],
 );
 await addFiles([hanyu7PinyinDic, hanyu7ZhuyinDic], "data/mdx-7/mdd");
 await processHanyu7(readTermsFromFile(`data/mdx-7/mdx/现汉7.mdx.txt`), [
