@@ -4,7 +4,7 @@ import { processGuifan } from "./dics/guifan/guifan.ts";
 import { processHanyu7 } from "./dics/hanyu7/hanyu7.ts";
 
 const versions = {
-  guifan: "2026/01/30.1",
+  guifan: "2026/02/01.1",
   hanyu7: "2026/01/12.1",
 };
 
