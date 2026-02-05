@@ -52,13 +52,13 @@
   display: block;
 }
 [data-sc-class="title"] {
-  text-decoration: underline;
-  text-decoration-style: dashed;
-  text-underline-offset: 3px;
-  color: #da98cb;
+  display: inline-block;
 }
-[data-sc-class="cont"] {
-  display: block;
+[data-sc-class="title"]::after {
+  content: "：";
+}
+[data-sc-hanyu7="ci"] {
+  display: inline-block;
   background-color: rgb(197 241 244 / 10%);
   border-radius: 8px;
   margin-top: 4px;
@@ -71,7 +71,10 @@
 a {
   color: #b971b9;
 }
-[data-sc-class="cont"] a {
+[data-sc-class="cont"] {
+  display: inline;
+}
+[data-sc-class="cont"] a:not(:last-child) {
   margin-right: 6px;
 }
 [data-sc-class="cont"] a:nth-child(even) {
