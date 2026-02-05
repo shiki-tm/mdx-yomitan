@@ -127,3 +127,7 @@ a {
 [data-sc-guifan="dd"][data-sc-class="x-ext1"] {
   margin-left: -0.6em;
 }
+
+[data-sc-guifan="reading-pinyin"] {
+  display: none;
+}
