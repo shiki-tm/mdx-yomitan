@@ -5,8 +5,8 @@
       "name": "mdx-yomitan",
       "dependencies": {
         "cheerio": "^1.1.2",
-        "pinyin-to-zhuyin": "^1.0.1",
-        "pinyin-tone-tool": "^1.0.4",
+        "pinyin-to-zhuyin": "^1.0.3",
+        "pinyin-tone-tool": "^1.0.5",
         "ramda": "^0.32.0",
         "yomichan-dict-builder": "^2.10.0",
       },
@@ -77,9 +77,9 @@
 
     "parse5-parser-stream": ["parse5-parser-stream@7.1.2", "", { "dependencies": { "parse5": "^7.0.0" } }, "sha512-JyeQc9iwFLn5TbvvqACIF/VXG6abODeB3Fwmv/TGdLk2LfbWkaySGY72at4+Ty7EkPZj854u4CrICqNk2qIbow=="],
 
-    "pinyin-to-zhuyin": ["pinyin-to-zhuyin@1.0.1", "", { "bin": { "p2z": "p2z.js", "z2p": "z2p.js" } }, "sha512-OCqOre/zS5aksip/gpTOb2ccDnY2puSbYEkhNUL3ggdmdRvva9oyKypouAnM2h6LZJw2VxxywnLCfrZT5TkZrA=="],
+    "pinyin-to-zhuyin": ["pinyin-to-zhuyin@1.0.3", "", { "bin": { "p2z": "p2z.js", "z2p": "z2p.js" } }, "sha512-hyfSkK9CQBXvyalqaaJgnf89eSiw732zNpg4285bwvUrTQtWBKUTZJ90VUOGzUg13AGnN+sUpJRmLuFtluHXNA=="],
 
-    "pinyin-tone-tool": ["pinyin-tone-tool@1.0.4", "", { "bin": { "markTones": "markTones.js", "numberTones": "numberTones.js", "segmentWord": "segmentWord.js" } }, "sha512-k5vWo0ZAct45urDf4XBsZKYz8Dp1sfe4iNr3fOOivxqYHax5WSMK1yJI5OlqpHXLFq/a9QdsJmaSpvrOBOgRgA=="],
+    "pinyin-tone-tool": ["pinyin-tone-tool@1.0.5", "", { "bin": { "markTones": "markTones.js", "numberTones": "numberTones.js", "segmentWord": "segmentWord.js" } }, "sha512-1tKAwjYvpvVJVr7Sb7oCW+Far9EqNtE7mG3mFFztPyGwJs7jZiWpfj62aA4MtY8P5iLcJ2G9975Y3Pkwygi0ug=="],
 
     "process-nextick-args": ["process-nextick-args@2.0.1", "", {}, "sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag=="],
 
