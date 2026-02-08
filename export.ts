@@ -6,7 +6,7 @@ import { mergeCssFiles } from "./utils/css.ts";
 
 const versions = {
   guifan: "2026/02/05.4",
-  hanyu7: "2026/02/08.1",
+  hanyu7: "2026/02/08.2",
 };
 
 const guifanPinyinDic = new Dictionary({ fileName: "guifan-pinyin.zip" });

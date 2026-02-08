@@ -104,11 +104,3 @@ details:last-child {
   color: #bab99e;
   padding: 6px;
 }
-
-[data-sc-hanyu7="zhuyin"],
-[data-sc-hanyu7="pinyin"] {
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  text-decoration-thickness: from-font;
-  text-decoration-style: dashed;
-}
