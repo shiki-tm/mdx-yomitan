@@ -105,9 +105,10 @@ details:last-child {
   padding: 6px;
 }
 
+[data-sc-hanyu7="zhuyin"],
 [data-sc-hanyu7="pinyin"] {
-  display: none;
-}
-[data-sc-hanyu7="zhuyin"] {
-  color: #b971b9;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: from-font;
+  text-decoration-style: dashed;
 }

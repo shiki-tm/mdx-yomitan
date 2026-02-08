@@ -2,10 +2,11 @@ import { addFiles, readTermsFromFile } from "./dics/shared.ts";
 import { Dictionary, DictionaryIndex } from "yomichan-dict-builder";
 import { processGuifan } from "./dics/guifan/guifan.ts";
 import { processHanyu7 } from "./dics/hanyu7/hanyu7.ts";
+import { mergeCssFiles } from "./utils/css.ts";
 
 const versions = {
   guifan: "2026/02/05.4",
-  hanyu7: "2026/02/06.1",
+  hanyu7: "2026/02/08.1",
 };
 
 const guifanPinyinDic = new Dictionary({ fileName: "guifan-pinyin.zip" });
@@ -106,6 +107,23 @@ await processHanyu7(readTermsFromFile(`data/mdx-7/mdx/现汉7.mdx.txt`), [
   hanyu7PinyinDic,
   hanyu7ZhuyinDic,
 ]);
+
+mergeCssFiles(
+  ["styles-guifan.css", "styles-guifan-pinyin-diff.css"],
+  "styles-guifan-pinyin.css",
+);
+mergeCssFiles(
+  ["styles-guifan.css", "styles-guifan-zhuyin-diff.css"],
+  "styles-guifan-zhuyin.css",
+);
+mergeCssFiles(
+  ["styles-hanyu7.css", "styles-hanyu7-pinyin-diff.css"],
+  "styles-hanyu7-pinyin.css",
+);
+mergeCssFiles(
+  ["styles-hanyu7.css", "styles-hanyu7-zhuyin-diff.css"],
+  "styles-hanyu7-zhuyin.css",
+);
 
 await Promise.all([
   guifanPinyinDic.addFile("./styles-guifan-pinyin.css", "styles.css"),
