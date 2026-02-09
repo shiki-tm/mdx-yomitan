@@ -58,13 +58,7 @@
   color: #629a61;
 }
 [data-sc-class="collapse"] {
-  display: inline-block;
-  [data-sc-class="x-lb"] {
-    color: #b1b11f;
-  }
-  [data-sc-class="x-lb"]::after {
-    content: "：";
-  }
+  display: block;
   [data-sc-class="unbox"] {
     display: inline-block;
     background-color: rgb(197 241 244 / 10%);
@@ -73,6 +67,12 @@
     margin-bottom: 2px;
     color: #bab99e;
     padding: 6px;
+  }
+  [data-sc-class="x-lb"] {
+    color: #b1b11f;
+  }
+  [data-sc-class="x-lb"]::after {
+    content: "：";
   }
 }
 [data-sc-guifan="sup"] {
