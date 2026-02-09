@@ -53,6 +53,7 @@
 }
 [data-sc-class="title"] {
   display: inline-block;
+  color: #b1b11f;
 }
 [data-sc-class="title"]::after {
   content: "：";
