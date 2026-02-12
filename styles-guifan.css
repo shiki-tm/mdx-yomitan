@@ -54,9 +54,6 @@
   padding-inline: 6px;
   vertical-align: text-bottom;
 }
-[data-sc-guifan="x-ref"] {
-  color: #629a61;
-}
 [data-sc-class="collapse"] {
   display: block;
   [data-sc-class="unbox"] {
